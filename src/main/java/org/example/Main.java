@@ -17,14 +17,28 @@ public class Main {
             //establecer la conexion
             conn = DriverManager.getConnection(url,user,password);
             //sentencia sql
-            String sql = "update estudiantePoo set b1 = ? where id = ?";
+            String sql = "update estudiantePoo set b1 = ? where cedula = ?";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, "111");
-            pstmt.setString(2, "111");
+            pstmt.setDouble(1, 19.90);
+            pstmt.setString(2, "0338943111");
+            pstmt.executeUpdate();
+
 
 
         }catch(SQLException e){
             System.out.println(e.getMessage());
+        }finally{
+            //cerramos la conexion
+            try{
+                if(pstmt != null){
+                    pstmt.close();
+                }
+                if(conn != null){
+                    conn.close();
+                }
+            }catch(SQLException e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
